@@ -1,3 +1,4 @@
 tfo/*tfstate
+tfo/*lock.hcl
 tfo/*tfstate*backup
 tfo/.terraform
