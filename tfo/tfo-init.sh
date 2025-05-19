@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#
 . ~/.doce-vars
 CHECK_PAT=${THE_PAT}x
 if [ $CHECK_PAT == "x" ];then
