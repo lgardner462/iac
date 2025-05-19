@@ -6,6 +6,14 @@ terraform {
       version = "~> 2.0"
     }
   }
+  cloud { 
+    
+    organization = "mrbonuts" 
+
+    workspaces { 
+      name = "mrbonuts-cli" 
+    } 
+  } 
 }
 #declare variables but leave blank so they aren't hard coded
 variable "do_token" {}
