@@ -21,7 +21,6 @@ terraform {
 
 #get token from variable do_token at run time
 provider "digitalocean" {
-    token = var.DIGITALOCEAN_TOKEN
 }
 
 #add ssh key to any provisioned droplets
