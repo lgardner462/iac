@@ -15,7 +15,7 @@ terraform {
     } 
   } 
 }
-#declare variables but leave blank so they aren't hard coded, this breaks hashicloud deploy...
+##declare variables but leave blank so they aren't hard coded, this breaks hashicloud deploy...
 variable "pvt_key"  {}
 variable "do_token" {}
 
