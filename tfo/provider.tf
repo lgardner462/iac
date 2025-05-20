@@ -16,8 +16,8 @@ terraform {
   } 
 }
 #declare variables but leave blank so they aren't hard coded, this breaks hashicloud deploy...
-#variable "pvt_key"  $TF_VAR_pvt_key 
-#variable "do_token" $TF_VAR_DIGITALOCEAN_TOKEN 
+variable "pvt_key"  
+variable "do_token" 
 
 #get token from variable do_token at run time
 provider "digitalocean" {
