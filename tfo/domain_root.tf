@@ -1,4 +1,3 @@
-var "my_host" {}
 resource "digitalocean_domain" "my_domain" {
    name = var.my_host
 }
