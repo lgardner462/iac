@@ -17,8 +17,12 @@ provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin",
       # install nginx
+      gitrepo = var.gitrepo
+      playbook = var.playbook
       "sudo apt update",
       "sudo apt install -y nginx ansible"
+      "/usr/local/bin/ansible-pull --accept-host-key --verbose \
+    --url "$gitrepo" --directory /var/local/src/instance-bootstrap "$playbook""
     ]
   }
 }
