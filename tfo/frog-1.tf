@@ -23,7 +23,7 @@ provisioner "remote-exec" {
       # install nginx
       "sudo apt update",
       "sudo apt install -y nginx ansible",
-      "/usr/local/bin/ansible-pull --private-key var.deploy_key --accept-host-key --verbose --url var.gitrepo --directory /var/local/src/instance-bootstrap var.playbook"
+      "/usr/bin/ansible-pull --private-key var.deploy_key --accept-host-key --verbose --url var.gitrepo --directory /var/local/src/instance-bootstrap var.playbook"
     ]
   }
 }
