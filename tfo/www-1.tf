@@ -17,6 +17,7 @@ connection {
 provisioner "remote-exec" {
     #gitrepo = var.gitrepo
     #playbook = var.playbook
+    # test
     inline = [
       "export PATH=$PATH:/usr/bin",
       # install nginx
