@@ -15,15 +15,15 @@ connection {
 
   }
 provisioner "remote-exec" {
-    #gitrepo = var.gitrepo
-    #playbook = var.playbook
+    gitrepo = var.gitrepo
+    playbook = var.playbook
     # test
     inline = [
       "export PATH=$PATH:/usr/bin",
       # install nginx
       "sudo apt update",
       "sudo apt install -y nginx ansible",
-      "/usr/bin/ansible-pull --private-key var.deploy_key --accept-host-key --verbose --url var.gitrepo --directory /var/local/src/instance-bootstrap var.playbook"
+      "/usr/bin/ansible-pull --private-key var.deploy_key --accept-host-key --verbose --url "${gitrepo} --directory /var/local/src/instance-bootstrap""${playbook}"
     ]
   }
 }
