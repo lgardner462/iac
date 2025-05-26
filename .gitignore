@@ -2,3 +2,5 @@ tfo/*tfstate
 tfo/*lock.hcl
 tfo/*tfstate*backup
 tfo/.terraform
+tfo/.notes
+ans/.notes

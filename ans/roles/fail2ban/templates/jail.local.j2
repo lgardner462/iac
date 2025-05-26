@@ -1,0 +1,12 @@
+[DEFAULT]
+bantime = {{ fail2ban_bantime }}
+findtime = {{ fail2ban_findtime }}
+maxretry = {{ fail2ban_maxretry }}
+
+[ssh]
+action = iptables[name=SSH, port=ssh, protocol=tcp]
+enabled = true
+filter = sshd
+logpath = /var/log/auth.log
+maxretry = 5
+port = ssh
