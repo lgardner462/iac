@@ -12,17 +12,17 @@ connection {
     type = "ssh"
     private_key = var.pvt_key
     timeout = "2m"
+
   }
 provisioner "remote-exec" {
+    #gitrepo = var.gitrepo
+    #playbook = var.playbook
     inline = [
       "export PATH=$PATH:/usr/bin",
       # install nginx
-      gitrepo = var.gitrepo
-      playbook = var.playbook
       "sudo apt update",
-      "sudo apt install -y nginx ansible"
-      "/usr/local/bin/ansible-pull --accept-host-key --verbose \
-    --url "$gitrepo" --directory /var/local/src/instance-bootstrap "$playbook""
+      "sudo apt install -y nginx ansible",
+      "/usr/local/bin/ansible-pull --private-key var.deploy_key --accept-host-key --verbose --url var.gitrepo --directory /var/local/src/instance-bootstrap var.playbook"
     ]
   }
 }

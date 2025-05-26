@@ -19,6 +19,9 @@ terraform {
 variable "pvt_key"  {}
 variable "do_token" {}
 variable "my_host" {}
+variable "gitrepo" {}
+variable "playbook" {}
+variable "deploy_key" {}
 #get token from variable do_token at run time
 provider "digitalocean" {
   token = var.do_token
