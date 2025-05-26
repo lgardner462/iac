@@ -1,6 +1,6 @@
-resource "digitalocean_droplet" "www-2" {
+resource "digitalocean_droplet" "frog-1" {
     image = "ubuntu-22-04-x64"
-    name = "www-2"
+    name = "frog-1"
     region = "nyc3"
     size = "s-1vcpu-1gb"
     ssh_keys = [
@@ -12,13 +12,18 @@ connection {
     type = "ssh"
     private_key = var.pvt_key
     timeout = "2m"
+
   }
 provisioner "remote-exec" {
+    #gitrepo = var.gitrepo
+    #playbook = var.playbook
+    # test
     inline = [
       "export PATH=$PATH:/usr/bin",
       # install nginx
       "sudo apt update",
-      "sudo apt install -y nginx ansible python3"
+      "sudo apt install -y nginx ansible",
+      "/usr/local/bin/ansible-pull --private-key var.deploy_key --accept-host-key --verbose --url var.gitrepo --directory /var/local/src/instance-bootstrap var.playbook"
     ]
   }
 }
