@@ -15,7 +15,7 @@ connection {
 
   }
 provisioner "remote-exec" {
-    # test
+    # test#
     # test1
     inline = [
       "export PATH=$PATH:/usr/bin",
