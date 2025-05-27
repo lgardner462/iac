@@ -15,9 +15,6 @@ connection {
 
   }
 provisioner "remote-exec" {
-    gitrepo = var.gitrepo
-    playbook = var.playbook
-    deploy_key = var.deploy_key
     # test
     inline = [
       "export PATH=$PATH:/usr/bin",
