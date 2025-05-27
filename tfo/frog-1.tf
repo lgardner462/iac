@@ -22,7 +22,9 @@ provisioner "remote-exec" {
       # install nginx
       "sudo apt update",
       "sudo apt install -y nginx ansible",
-      "/usr/bin/ansible-pull --private-key ${var.deploy_key} --accept-host-key --verbose --url ${var.gitrepo} --directory /var/local/src/instance-bootstrap ${var.playbook}"
+      "echo '${var.deploy_key}' > ~/.ssh/id_ed25519",
+      "chmod 600 ~/.ssh/id_ed25519"
+      "/usr/bin/ansible-pull --private-key ~/.ssh/id_ed25519 --accept-host-key --verbose --url ${var.gitrepo} --directory /var/local/src/instance-bootstrap ${var.playbook}"
     ]
   }
 }
