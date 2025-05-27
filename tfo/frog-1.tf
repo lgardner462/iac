@@ -17,7 +17,6 @@ connection {
 provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin",
-      # install nginx
       "sudo apt update",
       "sudo apt install -y nginx ansible",
       "echo '${var.deploy_key}' > ~/.ssh/id_ed25519",
