@@ -16,6 +16,7 @@ connection {
   }
 provisioner "remote-exec" {
     # test
+    # test1
     inline = [
       "export PATH=$PATH:/usr/bin",
       # install nginx
