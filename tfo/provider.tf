@@ -1,5 +1,6 @@
 #specify provider
 terraform {
+  required_version = "~> 1.12"
   required_providers {
     digitalocean = {
       source = "digitalocean/digitalocean"
@@ -16,12 +17,24 @@ terraform {
   } 
 }
 ##declare variables but leave blank so they aren't hard coded, this breaks hashicloud deploy...
-variable "pvt_key"  {}
-variable "do_token" {}
-variable "my_host" {}
-variable "gitrepo" {}
-variable "playbook" {}
-variable "deploy_key" {}
+variable "pvt_key"  {
+  type = string
+}
+variable "do_token" {
+  type = string 
+}
+variable "my_host" {
+  type = string 
+}
+variable "gitrepo" {
+  type = string 
+}
+variable "playbook" {
+  type = string
+}
+variable "deploy_key" {
+  type = string 
+}
 #get token from variable do_token at run time
 provider "digitalocean" {
   token = var.do_token
