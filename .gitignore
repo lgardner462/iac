@@ -4,3 +4,4 @@ tfo/*tfstate*backup
 tfo/.terraform
 tfo/.notes
 ans/.notes
+ans/.vault
