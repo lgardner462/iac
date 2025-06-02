@@ -2,6 +2,7 @@ resource "digitalocean_domain" "my_domain" {
    name = var.my_host
    ip_address = digitalocean_droplet.frog-1.ipv4_address
 }
+#
 resource "digitalocean_record" "cool-frogs" {
   domain = digitalocean_domain.my_domain.id
   type   = "A"
