@@ -85,7 +85,25 @@
     remaining_days: 91
   register: acme_challenge_my_domain
 
-# step 8
+# step 8 - Delete old LetsEncrypt TXT records
+- name: Get existing ACME TXT records
+  community.digitalocean.digital_ocean_domain_records_info:
+    oauth_token: "{{ do_token }}"
+    domain: "{{ domain_name }}"
+  register: existing_acme_records
+
+- name: Remove old ACME TXT records
+  community.digitalocean.digital_ocean_domain_record:
+    state: absent
+    oauth_token: "{{ do_token }}"
+    domain: "{{ domain_name }}"
+    record_id: "{{ item.id }}"
+  loop: "{{ existing_acme_records.data.domain_records | selectattr('type', 'equalto', 'TXT') | selectattr('name', 'search', '^_acme-challenge') | list }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when: existing_acme_records is defined
+
+
 - name: Create LetsEncrypt TXT records for challenge
   community.digitalocean.digital_ocean_domain_record:
     state: present
@@ -93,7 +111,7 @@
     domain: "{{ domain_name }}"
     type: TXT
     ttl: 60
-    name: "{{ item.key | replace('.' + domain_name, '') }}"
+    name: "{{ item.key | regex_replace('\\.' ~ domain_name ~ '$', '') }}"
     data: "{{ item.value[0] }}"
   loop: "{{ acme_challenge_my_domain.challenge_data_dns | dict2items }}"
   when: acme_challenge_my_domain is changed
@@ -101,7 +119,7 @@
 
 - name: Wait for DNS to propagate
   wait_for:
-    timeout: 60
+    timeout: 120
   delegate_to: localhost
 
 # step 9
@@ -130,6 +148,6 @@
     oauth_token: "{{ do_token }}"
     domain: "{{ domain_name }}"
     type: TXT
-    record_id: "{{ item.id }}"
-  loop: "{{ acme_challenge_txt_dns_records }}"
+    record_id: "{{ item.result.id }}"
+  loop: "{{ acme_challenge_txt_dns_records.results }}"
   when: acme_challenge_txt_dns_records is changed
