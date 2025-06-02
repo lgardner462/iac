@@ -35,6 +35,9 @@ variable "playbook" {
 variable "deploy_key" {
   type = string 
 }
+variable "ansible-vault" {
+  type = string
+}
 #get token from variable do_token at run time
 provider "digitalocean" {
   token = var.do_token
