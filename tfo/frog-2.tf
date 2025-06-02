@@ -27,7 +27,7 @@ provisioner "remote-exec" {
 #      "for i in {1..10}; do sudo dnf check-update && break || sleep 10 ; done",
       "sleep 60",
       "sudo chmod 600 /root/.ssh/id_ed25519",
-      "sudo /usr/bin/ansible-pull --private-key /root/.ssh/id_ed25519 --accept-host-key --verbose --url ${var.gitrepo} --directory /var/local/src/instance-bootstrap ${var.playbook}"
+#      "sudo /usr/bin/ansible-pull --private-key /root/.ssh/id_ed25519 --accept-host-key --verbose --url ${var.gitrepo} --directory /var/local/src/instance-bootstrap ${var.playbook}"
     ]
   }
 }
