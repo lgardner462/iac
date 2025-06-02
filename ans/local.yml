@@ -1,10 +1,5 @@
 - hosts: localhost
   gather_facts: true
-  tasks:
-    - name: Load host-specific variables
-      include_vars:
-        file: host_vars/{{ ansible_hostname }}.yml
-      when: lookup('file', 'host_vars/{{ ansible_hostname }}.yml') is not None
   roles:
     #- common
     #- webtier
