@@ -87,7 +87,7 @@
 
 # step 8 - Delete old LetsEncrypt TXT records
 - name: Get existing ACME TXT records
-  community.digitalocean.digital_ocean_domain_records_info:
+  community.digitalocean.digital_ocean_domain_record_info:
     oauth_token: "{{ do_token }}"
     domain: "{{ domain_name }}"
   register: existing_acme_records
