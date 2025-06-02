@@ -52,9 +52,10 @@
 
 # step 6
 - name: Generate LetsEncrypt CSR
-  shell: openssl req -new -sha256 -key "{{ letsencrypt_keys_dir }}"/"{{ domain_name }}".key -subj /CN="{{ domain_name }}" -reqexts SAN -config <(cat "{{ letsencrypt_csrs_dir }}/{{ domain_name }}".cnf) | sudo tee "{{ letsencrypt_csrs_dir }}/{{ domain_name }}".csr
+  shell: "openssl req -new -sha256 -key {{ letsencrypt_keys_dir }}/{{ domain_name }}.key -subj \"/CN={{ domain_name }}\" -reqexts SAN -config <(cat {{ letsencrypt_csrs_dir }}/{{ domain_name }}.cnf) | sudo tee {{ letsencrypt_csrs_dir }}/{{ domain_name }}.csr"
+  args:
+    executable: /bin/bash
   when: acme_challenge_cnf is changed
-
 # step 7
 - name: Begin LetsEncrypt challenges
   acme_certificate:
