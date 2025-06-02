@@ -92,6 +92,8 @@
     domain: "{{ domain_name }}"
   register: existing_acme_records
 
+
+
 - name: Dump the result of DigitalOcean domain record info
   debug:
     var: existing_acme_records
@@ -102,7 +104,7 @@
     oauth_token: "{{ do_token }}"
     domain: "{{ domain_name }}"
     record_id: "{{ item.id }}"
-  loop: "{{ existing_acme_records.records | selectattr('type', 'equalto', 'TXT') | selectattr('name', 'search', '^_acme-challenge') | list }}"
+  loop: "{{ existing_acme_records.data.records | selectattr('type', 'equalto', 'TXT') | selectattr('name', 'search', '^_acme-challenge') | list }}"
   loop_control:
     label: "{{ item.name }}"
   when: existing_acme_records is defined
