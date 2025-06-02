@@ -32,6 +32,8 @@
 - set_fact:
     domain_sans: >-
       {% for san in subdomains %}DNS:{{ san }}.{{ domain_name }}{% if not loop.last %},{% endif %}{% endfor %}
+  when: subdomains is defined and subdomains | length > 0
+
 
 # step 5
 - name: Read /etc/ssl/openssl.cnf
@@ -39,16 +41,20 @@
     src: /etc/ssl/openssl.cnf
   register: openssl_cnf
 
+
 - name: Generate LetsEncrypt CSR configuration
   copy:
     dest: "{{ letsencrypt_csrs_dir }}/{{ domain_name }}.cnf"
     content: |
-      {{ openssl_cnf["content"] }}
+      {{ openssl_cnf["content"] | b64decode }}
+      {% if subdomains is defined and subdomains | length > 0 %}
       [SAN]
       subjectAltName={{ domain_sans }}
+      {% endif %}
     owner: root
     group: root
   register: acme_challenge_cnf
+
 
 # step 6
 - name: Generate LetsEncrypt CSR
