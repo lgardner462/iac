@@ -1,7 +1,7 @@
 # step 1
 - name: Load host-specific variables
   include_vars:
-    file: "{{ ansible_hostname }}.yml"
+    file: "../vars/{{ ansible_hostname }}.yml"
 
 - name: Create required directories in /etc/letsencrypt
   file:
