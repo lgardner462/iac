@@ -99,6 +99,11 @@
   when: acme_challenge_my_domain is changed
   register: acme_challenge_txt_dns_records
 
+- name: Wait for DNS to propagate
+  wait_for:
+    timeout: 60
+  delegate_to: localhost
+
 # step 9
 - name: Complete LetsEncrypt challenges
   acme_certificate:
@@ -116,7 +121,7 @@
   register: acme_challenge_complete
   until: acme_challenge_complete is not failed
   retries: 10
-  delay: 10
+  delay: 15
 
 # step 10
 - name: Clean up LetsEncrypt TXT records
