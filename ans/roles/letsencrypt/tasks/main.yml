@@ -92,6 +92,10 @@
     domain: "{{ domain_name }}"
   register: existing_acme_records
 
+- name: Dump the result of DigitalOcean domain record info
+  debug:
+    var: existing_acme_records
+
 - name: Remove old ACME TXT records
   community.digitalocean.digital_ocean_domain_record:
     state: absent
