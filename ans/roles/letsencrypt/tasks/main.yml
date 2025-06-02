@@ -58,7 +58,6 @@
 
 # step 6
 - name: Generate LetsEncrypt CSR
-  - name: Generate LetsEncrypt CSR
   shell: >
     openssl req -new -sha256
     -key {{ letsencrypt_keys_dir }}/{{ domain_name }}.key
