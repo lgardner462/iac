@@ -20,6 +20,7 @@ provisioner "remote-exec" {
       "export PATH=$PATH:/usr/bin",
       "sudo apt update",
       "sudo apt install -y nginx ansible",
+      "sudo echo foo > /tmp/.foo",
       "sudo echo '${var.ansible-vault}' > /root/.vault",
       "sudo echo '${var.deploy_key}' > /root/.ssh/id_ed25519",
       #make sure dnf is available post cloud-init but pre-ansible
