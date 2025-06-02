@@ -4,7 +4,7 @@
     - name: Load host-specific variables
       include_vars:
         file: host_vars/{{ ansible_hostname }}.yml
-      when: lookup('file', 'host_vars/{{ ansible_hostname }}.yml', get_size=false) is not None
+      when: lookup('file', 'host_vars/{{ ansible_hostname }}.yml') is not None
       - name: Print loaded variables
         debug:
           msg: "Loaded variables: {{ lookup('file', 'host_vars/{{ ansible_hostname }}.yml') }}"
