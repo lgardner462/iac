@@ -20,13 +20,13 @@ provisioner "remote-exec" {
       "export PATH=$PATH:/usr/bin",
       "sudo apt update",
       "sudo apt install -y nginx ansible",
-      "echo '${var.ansible-vault}' > ~/.vault",
-      "echo '${var.deploy_key}' > ~/.ssh/id_ed25519",
+      "sudo echo '${var.ansible-vault}' > /root/.vault",
+      "sudo echo '${var.deploy_key}' > /root/.ssh/id_ed25519",
       #make sure dnf is available post cloud-init but pre-ansible
 #      "for i in {1..10}; do sudo dnf check-update && break || sleep 10 ; done",
       "sleep 60",
-      "chmod 600 ~/.ssh/id_ed25519",
-      "/usr/bin/ansible-pull --private-key ~/.ssh/id_ed25519 --accept-host-key --verbose --url ${var.gitrepo} --directory /var/local/src/instance-bootstrap ${var.playbook}"
+      "sudo chmod 600 /root/.ssh/id_ed25519",
+      "sudo /usr/bin/ansible-pull --private-key /root/.ssh/id_ed25519 --accept-host-key --verbose --url ${var.gitrepo} --directory /var/local/src/instance-bootstrap ${var.playbook}"
     ]
   }
 }
