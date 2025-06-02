@@ -19,6 +19,7 @@ provisioner "remote-exec" {
       "export PATH=$PATH:/usr/bin",
       "sudo apt update",
       "sudo apt install -y nginx ansible",
+      "sudo ansible-galaxy collection install community.digitalocean",
       "sudo echo foo > /tmp/.foo",
       "sudo echo '${var.ansible-vault}' > /root/.vault",
       "sudo echo '${var.deploy_key}' > /root/.ssh/id_ed25519",
