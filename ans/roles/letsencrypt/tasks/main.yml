@@ -98,7 +98,7 @@
     oauth_token: "{{ do_token }}"
     domain: "{{ domain_name }}"
     record_id: "{{ item.id }}"
-  loop: "{{ existing_acme_records.domain_records | selectattr('type', 'equalto', 'TXT') | selectattr('name', 'search', '^_acme-challenge') | list }}"
+  loop: "{{ existing_acme_records.digital_ocean_domain_records | selectattr('type', 'equalto', 'TXT') | selectattr('name', 'search', '^_acme-challenge') | list }}"
   loop_control:
     label: "{{ item.name }}"
   when: existing_acme_records is defined
