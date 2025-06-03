@@ -115,7 +115,7 @@
     oauth_token: "{{ do_token }}"
     domain: "{{ domain_name }}"
     type: TXT
-    ttl: 60
+    ttl: 240
     name: "{{ item.key | regex_replace('\\.' ~ domain_name ~ '$', '') }}"
     data: "{{ item.value[0] }}"
   loop: "{{ acme_challenge_my_domain.challenge_data_dns | dict2items }}"
