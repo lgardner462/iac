@@ -127,6 +127,15 @@
     timeout: 120
   delegate_to: localhost
 
+- name: Confirm TXT record from public resolver
+  shell: dig +short TXT _acme-challenge.{{ domain_name }} @8.8.8.8
+  register: dig_result
+  changed_when: false
+
+- name: Show TXT record seen by Google DNS
+  debug:
+    var: dig_result.stdout_lines
+
 # step 9
 - name: Complete LetsEncrypt challenges
   acme_certificate:
