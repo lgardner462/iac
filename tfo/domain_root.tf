@@ -3,11 +3,11 @@ resource "digitalocean_domain" "my_domain" {
    ip_address = digitalocean_droplet.frog-1.ipv4_address
 }
 #
-resource "digitalocean_record" "cool-frogs" {
-  domain = digitalocean_domain.my_domain.id
-  type   = "A"
-  name   = "cool-frogs"
-  value  = digitalocean_droplet.frog-2.ipv4_address  # Auto-updates with Droplet IP
+#resource "digitalocean_record" "cool-frogs" {
+#  domain = digitalocean_domain.my_domain.id
+#  type   = "A"
+#  name   = "cool-frogs"
+#  value  = digitalocean_droplet.frog-2.ipv4_address  # Auto-updates with Droplet IP
 
 
 }
