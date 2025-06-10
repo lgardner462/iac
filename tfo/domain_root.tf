@@ -8,6 +8,4 @@ resource "digitalocean_domain" "my_domain" {
 #  type   = "A"
 #  name   = "cool-frogs"
 #  value  = digitalocean_droplet.frog-2.ipv4_address  # Auto-updates with Droplet IP
-
-
-}
+#}
