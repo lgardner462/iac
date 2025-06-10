@@ -1,7 +1,7 @@
 resource "digitalocean_droplet" "frog-1" {
     image = "ubuntu-22-04-x64"
     name = "frog-1"
-    region = "nyc2"
+    region = "nyc3"
     size = "s-1vcpu-1gb"
     ssh_keys = [
       data.digitalocean_ssh_key.doce.id
@@ -25,9 +25,9 @@ provisioner "remote-exec" {
       "sudo echo '${var.deploy_key}' > /root/.ssh/id_ed25519",
       #make sure dnf is available post cloud-init but pre-ansible
       #"for i in {1..10}; do sudo dnf check-update && break || sleep 10 ; done",
-      "sleep 120",
+#      "sleep 120",
       "sudo chmod 600 /root/.ssh/id_ed25519",
-      "sudo /usr/bin/ansible-pull --private-key /root/.ssh/id_ed25519 --accept-host-key --verbose --url ${var.gitrepo} --directory /var/local/src/instance-bootstrap --vault-password-file /root/.vault ${var.playbook}",
+#      "sudo /usr/bin/ansible-pull --private-key /root/.ssh/id_ed25519 --accept-host-key --verbose --url ${var.gitrepo} --directory /var/local/src/instance-bootstrap --vault-password-file /root/.vault ${var.playbook}",
     ]
   }
 }
