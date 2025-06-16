@@ -1,5 +1,4 @@
 - name: Secure the site with Letsencrypt
-  hosts: nginx_deb_websites
   become: true
   vars:
     webroot_path: '/var/www/html'  # the root path of your site
