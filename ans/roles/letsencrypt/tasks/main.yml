@@ -22,7 +22,7 @@
           - ca-certificates
           - openssl
           - git
-      state: present
+        state: present
 
     - name: Clone the certbot source directory
       ansible.builtin.git:
