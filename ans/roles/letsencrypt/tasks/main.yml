@@ -16,7 +16,7 @@
           - ca-certificates
           - openssl
           - git
-          - python3-venv
+      state: present
 
     - name: Clone the certbot source directory
       ansible.builtin.git:
