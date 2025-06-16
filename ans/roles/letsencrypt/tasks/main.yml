@@ -5,7 +5,7 @@
 
 - name: Secure the site with Letsencrypt
   become: true
-  hosts: localhost
+  hosts: all
     #  vars:
     #webroot_path: '/var/www/html'  # the root path of your site
     #certbot_source_directory: /usr/local/certbot-src
