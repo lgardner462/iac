@@ -1,5 +1,5 @@
 - name: Secure the site with Letsencrypt
-  hosts: all
+  hosts: localhost
   become: true
 
   # play-level defaults (optional—delete or adjust as you wish)
