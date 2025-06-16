@@ -1,15 +1,18 @@
-- name: Load host-specific variables
-  include_vars:
-    file: "vars/{{ ansible_hostname }}.yml"
-
-
 - name: Secure the site with Letsencrypt
-  become: true
   hosts: all
-    #  vars:
-    #webroot_path: '/var/www/html'  # the root path of your site
-    #certbot_source_directory: /usr/local/certbot-src
-    #certbot_executable_path: "{{ certbot_source_directory }}/venv/bin/certbot"
+  become: true
+
+  # play-level defaults (optional—delete or adjust as you wish)
+  vars:
+    webroot_path: /var/www/html
+    certbot_source_directory: /usr/local/certbot-src
+    certbot_executable_path: "{{ certbot_source_directory }}/venv/bin/certbot"
+
+  pre_tasks:
+    - name: Load host-specific variables
+      ansible.builtin.include_vars:
+        file: "vars/{{ ansible_hostname }}.yml"
+
   tasks:
     - name: Install required packages for certbot
       ansible.builtin.apt:
@@ -26,24 +29,30 @@
 
     - name: Clone the certbot source directory
       ansible.builtin.git:
+        repo:  https://github.com/certbot/certbot
+        dest:  "{{ certbot_source_directory }}"
         depth: 1
-        repo: https://github.com/certbot/certbot
-        dest: "{{ certbot_source_directory }}"
-        update: true
         version: v2.8.0
+        update: yes
 
-
-    - name: Create certbot in virtual environment
+    - name: Create certbot virtualenv
       ansible.builtin.command: python3 tools/venv.py
       args:
         chdir: "{{ certbot_source_directory }}"
 
     - name: Generate the SSL certificate
-      ansible.builtin.command: "{{ certbot_executable_path }} --nginx -d {{ domain }} --non-interactive --agree-tos --email {{ email }}"
+      ansible.builtin.command:
+        argv:
+          - "{{ certbot_executable_path }}"
+          - "--nginx"
+          - "-d" ; "{{ domain }}"
+          - "--non-interactive"
+          - "--agree-tos"
+          - "--email" ; "{{ email }}"
 
     - name: Set up automatic renewal
       ansible.builtin.cron:
-        name: "Certbot automatic renewal"
-        job: "{{ certbot_executable_path }} renew --quiet"
+        name:  Certbot automatic renewal
+        job:   "{{ certbot_executable_path }} renew --quiet"
         minute: "11"
-        hour: "11"
+        hour:   "11"
