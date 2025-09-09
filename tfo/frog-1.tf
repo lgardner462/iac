@@ -1,7 +1,7 @@
 resource "digitalocean_droplet" "frog-1" {
     image = "ubuntu-22-04-x64"
     name = "frog-1"
-    region = "nyc3"
+    region = "nyc2"
     size = "s-1vcpu-1gb"
     ssh_keys = [
       data.digitalocean_ssh_key.doce.id
